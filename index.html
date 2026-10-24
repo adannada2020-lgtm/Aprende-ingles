@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FluencyForge - Aprende Inglés A1-A2 desde Cero</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter & Outfit) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        },
+                        accent: {
+                            teal: '#14b8a6',
+                            emerald: '#10b981',
+                            rose: '#f43f5e',
+                            amber: '#f59e0b',
+                        },
+                        darkbg: {
+                            900: '#0b0f19',
+                            800: '#111827',
+                            700: '#1f2937',
+                            600: '#374151'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Glassmorphism custom styling */
+        .glass-card {
+            background: rgba(31, 41, 55, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card-interactive {
+            background: rgba(31, 41, 55, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-interactive:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.15);
+        }
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.35);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4f46e5;
+        }
+        /* Keyframe animations */
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(0.98); }
+        }
+        .pulse-subtle {
+            animation: pulse-subtle 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-darkbg-900 text-slate-100 font-sans min-h-screen flex flex-col md:flex-row antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- MOBILE HEADER -->
+    <header class="md:hidden bg-darkbg-800 border-b border-gray-800 p-4 flex items-center justify-between sticky top-0 z-50 glass-card">
+        <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-teal flex items-center justify-center font-display font-bold text-white text-lg">
+                FF
+            </div>
+            <div>
+                <h1 class="font-display font-bold text-base text-white tracking-wide">FluencyForge</h1>
+                <p class="text-xs text-brand-500 font-medium">English A1 - A2</p>
+            </div>
+        </div>
+        <button id="mobileMenuBtn" class="text-gray-300 hover:text-white focus:outline-none p-2 rounded-lg bg-gray-800/60">
+            <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+    </header>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-40 w-72 bg-darkbg-800 border-r border-gray-800/80 flex flex-col justify-between p-5 md:static md:h-screen">
+        <div class="space-y-6">
+            <!-- Brand Logo -->
+            <div class="hidden md:flex items-center space-x-3 px-2">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-teal flex items-center justify-center font-display font-bold text-white text-xl shadow-lg shadow-brand-500/30">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1 class="font-display font-bold text-xl text-white tracking-wide">FluencyForge</h1>
+                    <p class="text-xs text-brand-400 font-medium">Aprende Inglés A1-A2</p>
+                </div>
+            </div>
+
+            <!-- Score & Stats Widget -->
+            <div class="glass-card rounded-2xl p-4 border border-indigo-500/20 bg-gradient-to-b from-indigo-950/30 to-gray-900/40">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Tu Progreso</span>
+                    <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/30">Nivel A1-A2</span>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-darkbg-900/60 rounded-xl p-3 border border-gray-800 flex items-center space-x-3">
+                        <div class="text-amber-400 text-xl"><i class="fa-solid fa-fire"></i></div>
+                        <div>
+                            <div id="streakCounter" class="text-lg font-bold text-white">0</div>
+                            <div class="text-[10px] text-gray-400 font-medium">Racha (Días)</div>
+                        </div>
+                    </div>
+                    <div class="bg-darkbg-900/60 rounded-xl p-3 border border-gray-800 flex items-center space-x-3">
+                        <div class="text-accent-emerald text-xl"><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <div id="scoreCounter" class="text-lg font-bold text-white">0</div>
+                            <div class="text-[10px] text-gray-400 font-medium">Puntos EXP</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="space-y-1.5" id="mainNav">
+                <button data-section="alphabet" class="nav-btn active w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-white bg-brand-600 shadow-lg shadow-brand-600/25">
+                    <i class="fa-solid fa-font text-lg w-6"></i>
+                    <span class="flex-1 text-left">Abecedario <span class="text-xs text-indigo-200 block font-normal">(Alphabet)</span></span>
+                </button>
+                <button data-section="basics" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-gray-400 hover:text-white hover:bg-gray-800/60">
+                    <i class="fa-solid fa-cubes text-lg w-6"></i>
+                    <span class="flex-1 text-left">Vocabulario Básico <span class="text-xs text-gray-500 block font-normal">(Basics)</span></span>
+                </button>
+                <button data-section="verbs" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-gray-400 hover:text-white hover:bg-gray-800/60">
+                    <i class="fa-solid fa-bolt text-lg w-6"></i>
+                    <span class="flex-1 text-left">Verbos y Tiempos <span class="text-xs text-gray-500 block font-normal">(Conjugations)</span></span>
+                </button>
+                <button data-section="grammar" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-gray-400 hover:text-white hover:bg-gray-800/60">
+                    <i class="fa-solid fa-link text-lg w-6"></i>
+                    <span class="flex-1 text-left">Artículos y Conectores <span class="text-xs text-gray-500 block font-normal">(Grammar)</span></span>
+                </button>
+                <button data-section="practice" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-gray-400 hover:text-white hover:bg-gray-800/60">
+                    <i class="fa-solid fa-gamepad text-lg w-6"></i>
+                    <span class="flex-1 text-left">Desafío Interactivo <span class="text-xs text-gray-500 block font-normal">(Interactive Quiz)</span></span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Audio Settings / Footer Info -->
+        <div class="pt-4 border-t border-gray-800 space-y-3">
+            <div class="flex items-center justify-between px-2">
+                <span class="text-xs text-gray-400"><i class="fa-solid fa-volume-high mr-1.5"></i> Audio Pronunciación</span>
+                <button id="toggleAudioBtn" class="text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-full font-medium flex items-center space-x-1 hover:bg-emerald-500/30">
+                    <i class="fa-solid fa-check text-[10px]"></i>
+                    <span>Activo</span>
+                </button>
+            </div>
+            <p class="text-[11px] text-gray-500 px-2 leading-relaxed">
+                Inglés A1-A2 interactivo con pronunciación fonética y validación en tiempo real.
+            </p>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 h-screen overflow-y-auto bg-darkbg-900 p-4 sm:p-6 lg:p-8">
+
+        <!-- SECTION 1: ALPHABET -->
+        <section id="section-alphabet" class="content-section space-y-6">
+            <!-- Header Banner -->
+            <div class="glass-card rounded-3xl p-6 md:p-8 border-l-4 border-l-brand-500 relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-brand-500 text-9xl font-extrabold select-none">Aa</div>
+                <div class="relative z-10 space-y-2 max-w-2xl">
+                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/30">Sección 1 • Section 1</span>
+                    <h2 class="text-2xl sm:text-3xl font-display font-bold text-white">English Alphabet <span class="text-gray-400 font-normal text-xl sm:text-2xl">(Abecedario completo)</span></h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        Aprende la pronunciación correcta de cada letra en inglés. Toca cualquier tarjeta para escuchar el audio nativo y practica su pronunciación fonética en español.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Alphabet Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5" id="alphabetGrid">
+                <!-- Javascript will dynamically inject the 26 alphabet cards -->
+            </div>
+
+            <!-- Interactive Alphabet Quiz Box -->
+            <div class="glass-card rounded-3xl p-6 border border-brand-500/30 mt-8 bg-gradient-to-br from-darkbg-800 to-indigo-950/40">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-display font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-headphones text-accent-teal"></i>
+                            Listening Practice: Alphabet <span class="text-sm text-gray-400 font-normal">(Práctica Auditiva)</span>
+                        </h3>
+                        <p class="text-xs text-gray-400 mt-1">Escucha el sonido de la letra y escribe la letra correspondiente en inglés.</p>
+                    </div>
+                    <button id="playAlphabetAudioBtn" class="bg-accent-teal hover:bg-teal-600 text-darkbg-900 font-bold px-4 py-2.5 rounded-xl shadow-lg shadow-teal-500/20 flex items-center gap-2 text-sm transition-all active:scale-95">
+                        <i class="fa-solid fa-volume-high"></i> Escuchar Letra
+                    </button>
+                </div>
+
+                <form id="alphabetQuizForm" class="space-y-4" onsubmit="return false;">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <div class="relative flex-1">
+                            <input type="text" id="alphabetInput" maxlength="1" placeholder="Escribe la letra aquí (e.g. A, B, C)..." class="w-full bg-darkbg-900/90 border border-gray-700 focus:border-brand-500 rounded-xl px-4 py-3 text-white text-lg font-bold uppercase tracking-widest outline-none transition-all placeholder:text-gray-600 font-mono">
+                            <span class="absolute right-3 top-3 text-xs text-gray-500 uppercase font-mono">1 Letra</span>
+                        </div>
+                        <button type="submit" id="checkAlphabetBtn" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                            <span>Verificar</span>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div id="alphabetFeedback" class="hidden p-4 rounded-xl text-sm font-medium transition-all"></div>
+                </form>
+            </div>
+        </section>
+
+
+        <!-- SECTION 2: BASICS -->
+        <section id="section-basics" class="content-section space-y-6 hidden">
+            <!-- Header Banner -->
+            <div class="glass-card rounded-3xl p-6 md:p-8 border-l-4 border-l-accent-teal relative overflow-hidden">
+                <div class="relative z-10 space-y-2 max-w-2xl">
+                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-teal/20 text-accent-teal border border-accent-teal/30">Sección 2 • Section 2</span>
+                    <h2 class="text-2xl sm:text-3xl font-display font-bold text-white">Basic Vocabulary <span class="text-gray-400 font-normal text-xl sm:text-2xl">(Vocabulario Básico)</span></h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        Explora las categorías fundamentales del idioma: Números, Meses, Días de la semana, Colores, Profesiones y Alimentos con su pronunciación fonética.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="flex overflow-x-auto gap-2 pb-2 scrollbar-none" id="basicsTabs">
+                <button data-cat="numbers" class="cat-tab active px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition-all bg-brand-600 text-white shadow-md">
+                    <i class="fa-solid fa-arrow-1-9 mr-2"></i> Numbers (Números)
+                </button>
+                <button data-cat="months" class="cat-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition-all bg-darkbg-800 text-gray-400 hover:text-white hover:bg-gray-700">
+                    <i class="fa-solid fa-calendar-days mr-2"></i> Months (Meses)
+                </button>
+                <button data-cat="days" class="cat-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition-all bg-darkbg-800 text-gray-400 hover:text-white hover:bg-gray-700">
+                    <i class="fa-solid fa-clock mr-2"></i> Days (Días)
+                </button>
+                <button data-cat="colors" class="cat-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition-all bg-darkbg-800 text-gray-400 hover:text-white hover:bg-gray-700">
+                    <i class="fa-solid fa-palette mr-2"></i> Colors (Colores)
+                </button>
+                <button data-cat="professions" class="cat-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition-all bg-darkbg-800 text-gray-400 hover:text-white hover:bg-gray-700">
+                    <i class="fa-solid fa-briefcase mr-2"></i> Professions (Profesiones)
+                </button>
+                <button data-cat="food" class="cat-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition-all bg-darkbg-800 text-gray-400 hover:text-white hover:bg-gray-700">
+                    <i class="fa-solid fa-apple-whole mr-2"></i> Fruits & Veggies (Frutas y Verduras)
+                </button>
+            </div>
+
+            <!-- Display Cards Grid -->
+            <div id="basicsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Javascript populates cards according to selected category -->
+            </div>
+
+            <!-- Basics Typing Practice -->
+            <div class="glass-card rounded-3xl p-6 border border-gray-800 mt-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-display font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-keyboard text-brand-500"></i>
+                        Interactive Typing Quiz <span class="text-xs text-gray-400 font-normal">(Escribe la palabra correcta)</span>
+                    </h3>
+                    <span id="basicsQuizCatBadge" class="text-xs bg-brand-500/20 text-brand-300 border border-brand-500/30 px-3 py-1 rounded-full font-medium">Categoría: Numbers</span>
+                </div>
+
+                <div class="bg-darkbg-900/80 rounded-2xl p-5 border border-gray-800/80 mb-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs text-gray-400 block mb-1">Traduce al Inglés (Spanish Prompt):</span>
+                        <div id="basicsPrompt" class="text-2xl font-bold text-white font-display">Uno</div>
+                        <span id="basicsPhoneticHint" class="text-xs text-brand-400 font-mono mt-1 block">[wán]</span>
+                    </div>
+                    <button id="listenBasicsPromptBtn" class="bg-gray-800 hover:bg-gray-700 text-indigo-300 border border-indigo-500/30 px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-volume-high"></i> Escuchar Pista
+                    </button>
+                </div>
+
+                <form id="basicsQuizForm" class="space-y-4" onsubmit="return false;">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="basicsInput" placeholder="Escribe el nombre en inglés aquí (e.g. One)..." class="flex-1 bg-darkbg-900 border border-gray-700 focus:border-brand-500 rounded-xl px-4 py-3 text-white text-base outline-none transition-all placeholder:text-gray-600">
+                        <button type="submit" id="checkBasicsBtn" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition-all">
+                            Verificar Respuesta
+                        </button>
+                    </div>
+                    <div id="basicsFeedback" class="hidden p-4 rounded-xl text-sm font-medium transition-all"></div>
+                </form>
+            </div>
+        </section>
+
+
+        <!-- SECTION 3: VERB CONJUGATIONS -->
+        <section id="section-verbs" class="content-section space-y-6 hidden">
+            <!-- Header Banner -->
+            <div class="glass-card rounded-3xl p-6 md:p-8 border-l-4 border-l-accent-amber relative overflow-hidden">
+                <div class="relative z-10 space-y-2 max-w-2xl">
+                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-amber/20 text-accent-amber border border-accent-amber/30">Sección 3 • Section 3</span>
+                    <h2 class="text-2xl sm:text-3xl font-display font-bold text-white">Verb Conjugations <span class="text-gray-400 font-normal text-xl sm:text-2xl">(Conjugaciones en Presente, Pasado y Futuro)</span></h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        Aprende la conjugación exacta de los verbos esenciales en inglés (To Be, Speak, Live, Go, Do, etc.) en tiempo Presente, Pasado y Futuro.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Verb Selection Tabs -->
+            <div class="flex overflow-x-auto gap-2 pb-2 scrollbar-none" id="verbTabs">
+                <!-- JS populates verb selection buttons -->
+            </div>
+
+            <!-- Verb Detail Card & Conjugation Table -->
+            <div class="glass-card rounded-3xl p-6 border border-gray-800 space-y-6" id="verbDetailContainer">
+                <!-- JS dynamically renders active verb info -->
+            </div>
+
+            <!-- Conjugation Interactive Generator Exercise -->
+            <div class="glass-card rounded-3xl p-6 border border-accent-amber/30 bg-gradient-to-br from-darkbg-800 to-amber-950/20">
+                <h3 class="text-lg font-display font-bold text-white flex items-center gap-2 mb-4">
+                    <i class="fa-solid fa-wand-magic-sparkles text-accent-amber"></i>
+                    Conjugation Challenge <span class="text-xs text-gray-400 font-normal">(Desafío de Conjugación)</span>
+                </h3>
+
+                <div id="verbChallengeBox" class="bg-darkbg-900/90 rounded-2xl p-5 border border-gray-800 mb-4 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-accent-amber" id="verbChallengeTense">Present Tense</span>
+                        <span class="text-xs text-gray-400 font-mono" id="verbChallengeSubject">Subject: I (Yo)</span>
+                    </div>
+                    <div class="text-xl font-bold text-white" id="verbChallengePrompt">
+                        Conjuga el verbo <span class="text-brand-400">To Speak (Hablar)</span> para el sujeto <span class="text-accent-teal">"I"</span> en <span class="text-amber-400">Present</span>:
+                    </div>
+                    <div class="text-xs text-gray-400 font-mono" id="verbChallengeHint">Ejemplo en español: "Yo hablo"</div>
+                </div>
+
+                <form id="verbQuizForm" class="space-y-4" onsubmit="return false;">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="verbQuizInput" placeholder="Escribe la conjugación en inglés (e.g. speak)..." class="flex-1 bg-darkbg-900 border border-gray-700 focus:border-accent-amber rounded-xl px-4 py-3 text-white text-base outline-none transition-all placeholder:text-gray-600">
+                        <button type="submit" id="checkVerbBtn" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition-all">
+                            Verificar Conjugación
+                        </button>
+                    </div>
+                    <div id="verbFeedback" class="hidden p-4 rounded-xl text-sm font-medium transition-all"></div>
+                </form>
+            </div>
+        </section>
+
+
+        <!-- SECTION 4: ARTICLES, CONNECTORS & DETERMINANTS -->
+        <section id="section-grammar" class="content-section space-y-6 hidden">
+            <!-- Header Banner -->
+            <div class="glass-card rounded-3xl p-6 md:p-8 border-l-4 border-l-accent-rose relative overflow-hidden">
+                <div class="relative z-10 space-y-2 max-w-2xl">
+                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-rose/20 text-accent-rose border border-accent-rose/30">Sección 4 • Section 4</span>
+                    <h2 class="text-2xl sm:text-3xl font-display font-bold text-white">Articles, Connectors & Determinants <span class="text-gray-400 font-normal text-xl sm:text-2xl">(Artículos, Conectores y Determinantes)</span></h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        Conoce las palabras clave para conectar oraciones: conectores (*with, and, or, after, before*), artículos (*the, a, an*) y posesivos (*my, your, his, her*).
+                    </p>
+                </div>
+            </div>
+
+            <!-- Grammar Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Connectors & Prepositions -->
+                <div class="glass-card rounded-3xl p-6 border border-gray-800 space-y-4">
+                    <h3 class="text-lg font-display font-bold text-white flex items-center gap-2 text-indigo-400">
+                        <i class="fa-solid fa-link"></i> Connectors & Prepositions <span class="text-xs text-gray-400 font-normal">(Conectores y Preposiciones)</span>
+                    </h3>
+                    <div class="divide-y divide-gray-800/60" id="connectorsList">
+                        <!-- JS injects connectors -->
+                    </div>
+                </div>
+
+                <!-- Articles & Possessives -->
+                <div class="glass-card rounded-3xl p-6 border border-gray-800 space-y-4">
+                    <h3 class="text-lg font-display font-bold text-white flex items-center gap-2 text-rose-400">
+                        <i class="fa-solid fa-glasses"></i> Articles & Determinants <span class="text-xs text-gray-400 font-normal">(Artículos y Determinantes)</span>
+                    </h3>
+                    <div class="divide-y divide-gray-800/60" id="articlesList">
+                        <!-- JS injects articles -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sentence Completion Quiz -->
+            <div class="glass-card rounded-3xl p-6 border border-accent-rose/30 bg-gradient-to-br from-darkbg-800 to-rose-950/20 mt-8">
+                <h3 class="text-lg font-display font-bold text-white flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-puzzle-piece text-accent-rose"></i>
+                    Sentence Completion <span class="text-xs text-gray-400 font-normal">(Completa la Oración)</span>
+                </h3>
+                <p class="text-xs text-gray-400 mb-4">Completa el espacio en blanco con el artículo, conector o determinante adecuado.</p>
+
+                <div class="bg-darkbg-900/90 rounded-2xl p-5 border border-gray-800 mb-4">
+                    <div id="grammarSentencePrompt" class="text-xl font-medium text-white leading-relaxed">
+                        I want coffee <span class="text-rose-400 font-bold border-b-2 border-rose-500 px-3 py-0.5 bg-rose-500/10 rounded">_____</span> milk.
+                    </div>
+                    <div id="grammarSentenceSpanish" class="text-xs text-gray-400 mt-2 font-sans">
+                        Traducción: Quiero café <span class="text-rose-300 font-semibold">(con)</span> leche.
+                    </div>
+                </div>
+
+                <form id="grammarQuizForm" class="space-y-4" onsubmit="return false;">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="grammarQuizInput" placeholder="Escribe la palabra faltante en inglés (e.g. with)..." class="flex-1 bg-darkbg-900 border border-gray-700 focus:border-accent-rose rounded-xl px-4 py-3 text-white text-base outline-none transition-all placeholder:text-gray-600">
+                        <button type="submit" id="checkGrammarBtn" class="bg-rose-600 hover:bg-rose-500 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition-all">
+                            Comprobar Respuesta
+                        </button>
+                    </div>
+                    <div id="grammarFeedback" class="hidden p-4 rounded-xl text-sm font-medium transition-all"></div>
+                </form>
+            </div>
+        </section>
+
+
+        <!-- SECTION 5: GLOBAL INTERACTIVE PRACTICE ENGINE -->
+        <section id="section-practice" class="content-section space-y-6 hidden">
+            <!-- Header Banner -->
+            <div class="glass-card rounded-3xl p-6 md:p-8 border-l-4 border-l-brand-500 relative overflow-hidden bg-gradient-to-r from-darkbg-800 via-darkbg-800 to-indigo-950/40">
+                <div class="relative z-10 space-y-2 max-w-2xl">
+                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/30">Desafío Global • Interactive Quiz</span>
+                    <h2 class="text-2xl sm:text-3xl font-display font-bold text-white">Full Mastery Challenge <span class="text-gray-400 font-normal text-xl sm:text-2xl">(Examen de Práctica A1-A2)</span></h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        Pon a prueba todo tu conocimiento de vocabulario, abecedario, conjugaciones y artículos en este generador dinámico de preguntas.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quiz Card Widget -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 border border-brand-500/40 glow-effect relative">
+                <!-- Progress Header -->
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-800">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-10 h-10 rounded-xl bg-brand-500/20 border border-brand-500/40 text-brand-400 font-bold flex items-center justify-center font-mono text-base" id="practiceQuestionNum">
+                            #1
+                        </span>
+                        <div>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider block" id="practiceCategoryBadge">Categoría: Mezcla General</span>
+                            <h4 class="text-sm font-semibold text-white">Evaluación Continua</h4>
+                        </div>
+                    </div>
+                    <button id="listenPracticeAudioBtn" class="bg-gray-800 hover:bg-gray-700 text-indigo-300 border border-indigo-500/30 px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-volume-high text-sm"></i> Escuchar Pista
+                    </button>
+                </div>
+
+                <!-- Main Prompt -->
+                <div class="space-y-4 mb-6">
+                    <div class="text-xs text-gray-400">Pregunta / Prompt:</div>
+                    <div id="practicePromptText" class="text-2xl sm:text-3xl font-display font-bold text-white leading-snug">
+                        ¿Cómo se dice <span class="text-brand-400">"Manzana"</span> en inglés?
+                    </div>
+                    <div id="practiceSubHint" class="text-xs text-gray-400 font-mono">
+                        Pronunciación aproximada: [á-pl]
+                    </div>
+                </div>
+
+                <!-- Input & Actions Form -->
+                <form id="globalPracticeForm" class="space-y-4" onsubmit="return false;">
+                    <div class="relative">
+                        <input type="text" id="globalPracticeInput" placeholder="Escribe tu respuesta aquí en inglés..." class="w-full bg-darkbg-900 border-2 border-gray-700 focus:border-brand-500 rounded-2xl px-5 py-4 text-white text-lg font-medium outline-none transition-all placeholder:text-gray-600 shadow-inner">
+                        <button type="button" id="clearPracticeInputBtn" class="absolute right-4 top-4 text-gray-500 hover:text-white text-sm">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <button type="submit" id="submitPracticeBtn" class="flex-1 bg-brand-600 hover:bg-brand-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2 text-base">
+                            <i class="fa-solid fa-check"></i>
+                            <span>Enviar Respuesta</span>
+                        </button>
+                        <button type="button" id="skipPracticeBtn" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold px-5 py-3.5 rounded-xl transition-all text-sm flex items-center justify-center gap-2">
+                            <span>Siguiente Pregunta</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Instant Feedback Box -->
+                    <div id="globalPracticeFeedback" class="hidden rounded-2xl p-4 text-sm font-medium transition-all"></div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* ==========================================================================
+           1. DATA STORE (Alphabet, Basics, Verbs, Grammar, Practices)
+           ========================================================================== */
+        const ALPHABET_DATA = [
+            { letter: 'A', name: 'A', spanish: 'A', phonetic: 'Ei', example: 'Apple (Manzana)' },
+            { letter: 'B', name: 'B', spanish: 'B', phonetic: 'Bi', example: 'Boy (Niño)' },
+            { letter: 'C', name: 'C', spanish: 'C', phonetic: 'Si', example: 'Cat (Gato)' },
+            { letter: 'D', name: 'D', spanish: 'D', phonetic: 'Di', example: 'Dog (Perro)' },
+            { letter: 'E', name: 'E', spanish: 'E', phonetic: 'I', example: 'Elephant (Elefante)' },
+            { letter: 'F', name: 'F', spanish: 'F', phonetic: 'Ef', example: 'Fish (Pez)' },
+            { letter: 'G', name: 'G', spanish: 'G', phonetic: 'Yi', example: 'Green (Verde)' },
+            { letter: 'H', name: 'H', spanish: 'H', phonetic: 'Eich', example: 'House (Casa)' },
+            { letter: 'I', name: 'I', spanish: 'I', phonetic: 'Ai', example: 'Ice (Hielo)' },
+            { letter: 'J', name: 'J', spanish: 'J', phonetic: 'Jei', example: 'Juice (Jugo)' },
+            { letter: 'K', name: 'K', spanish: 'K', phonetic: 'Kei', example: 'Key (Llave)' },
+            { letter: 'L', name: 'L', spanish: 'L', phonetic: 'El', example: 'Lion (León)' },
+            { letter: 'M', name: 'M', spanish: 'M', phonetic: 'Em', example: 'Moon (Luna)' },
+            { letter: 'N', name: 'N', spanish: 'N', phonetic: 'En', example: 'Night (Noche)' },
+            { letter: 'O', name: 'O', spanish: 'O', phonetic: 'Ou', example: 'Orange (Naranja)' },
+            { letter: 'P', name: 'P', spanish: 'P', phonetic: 'Pi', example: 'Paper (Papel)' },
+            { letter: 'Q', name: 'Q', spanish: 'Q', phonetic: 'Kiu', example: 'Queen (Reina)' },
+            { letter: 'R', name: 'R', spanish: 'R', phonetic: 'Ar', example: 'Red (Rojo)' },
+            { letter: 'S', name: 'S', spanish: 'S', phonetic: 'Es', example: 'Sun (Sol)' },
+            { letter: 'T', name: 'T', spanish: 'T', phonetic: 'Ti', example: 'Time (Tiempo)' },
+            { letter: 'U', name: 'U', spanish: 'U', phonetic: 'Yiu', example: 'Umbrella (Sombrilla)' },
+            { letter: 'V', name: 'V', spanish: 'V', phonetic: 'Vii', example: 'Voice (Voz)' },
+            { letter: 'W', name: 'W', spanish: 'W', phonetic: 'Dabl-yiu', example: 'Water (Agua)' },
+            { letter: 'X', name: 'X', spanish: 'X', phonetic: 'Eks', example: 'X-ray (Rayos X)' },
+            { letter: 'Y', name: 'Y', spanish: 'Y', phonetic: 'Uai', example: 'Yellow (Amarillo)' },
+            { letter: 'Z', name: 'Z', spanish: 'Z', phonetic: 'Zi', example: 'Zoo (Zoológico)' }
+        ];
+
+        const BASICS_DATA = {
+            numbers: [
+                { en: 'One', es: 'Uno', phonetic: 'Wán' },
+                { en: 'Two', es: 'Dos', phonetic: 'Tú' },
+                { en: 'Three', es: 'Tres', phonetic: 'Zrí' },
+                { en: 'Four', es: 'Cuatro', phonetic: 'Fór' },
+                { en: 'Five', es: 'Cinco', phonetic: 'Fáiv' },
+                { en: 'Six', es: 'Seis', phonetic: 'Siks' },
+                { en: 'Seven', es: 'Siete', phonetic: 'Séven' },
+                { en: 'Eight', es: 'Ocho', phonetic: 'Eit' },
+                { en: 'Nine', es: 'Nueve', phonetic: 'Náin' },
+                { en: 'Ten', es: 'Diez', phonetic: 'Ten' },
+                { en: 'Twenty', es: 'Veinte', phonetic: 'Tuénti' },
+                { en: 'One hundred', es: 'Cien', phonetic: 'Wán jándred' }
+            ],
+            months: [
+                { en: 'January', es: 'Enero', phonetic: 'Yányuari' },
+                { en: 'February', es: 'Febrero', phonetic: 'Fébruari' },
+                { en: 'March', es: 'Marzo', phonetic: 'March' },
+                { en: 'April', es: 'Abril', phonetic: 'Éipril' },
+                { en: 'May', es: 'Mayo', phonetic: 'Méi' },
+                { en: 'June', es: 'Junio', phonetic: 'Yún' },
+                { en: 'July', es: 'Julio', phonetic: 'Yulái' },
+                { en: 'August', es: 'Agosto', phonetic: 'Ógost' },
+                { en: 'September', es: 'Septiembre', phonetic: 'Septémber' },
+                { en: 'October', es: 'Octubre', phonetic: 'Octóuber' },
+                { en: 'November', es: 'Noviembre', phonetic: 'Novémber' },
+                { en: 'December', es: 'Diciembre', phonetic: 'Disémber' }
+            ],
+            days: [
+                { en: 'Monday', es: 'Lunes', phonetic: 'Mándei' },
+                { en: 'Tuesday', es: 'Martes', phonetic: 'Tiúsdei' },
+                { en: 'Wednesday', es: 'Miércoles', phonetic: 'Wénsdei' },
+                { en: 'Thursday', es: 'Jueves', phonetic: 'Zérsdei' },
+                { en: 'Friday', es: 'Viernes', phonetic: 'Fráidei' },
+                { en: 'Saturday', es: 'Sábado', phonetic: 'Sáturdei' },
+                { en: 'Sunday', es: 'Domingo', phonetic: 'Sándei' }
+            ],
+            colors: [
+                { en: 'Red', es: 'Rojo', phonetic: 'Red' },
+                { en: 'Blue', es: 'Azul', phonetic: 'Blú' },
+                { en: 'Green', es: 'Verde', phonetic: 'Grín' },
+                { en: 'Yellow', es: 'Amarillo', phonetic: 'Yélou' },
+                { en: 'Black', es: 'Negro', phonetic: 'Blák' },
+                { en: 'White', es: 'Blanco', phonetic: 'Uáit' },
+                { en: 'Purple', es: 'Morado', phonetic: 'Pérpl' },
+                { en: 'Orange', es: 'Naranja', phonetic: 'Órenj' }
+            ],
+            professions: [
+                { en: 'Doctor', es: 'Médico / Doctora', phonetic: 'Dóktor' },
+                { en: 'Teacher', es: 'Profesor(a)', phonetic: 'Tícher' },
+                { en: 'Engineer', es: 'Ingeniero(a)', phonetic: 'Enjiníer' },
+                { en: 'Nurse', es: 'Enfermero(a)', phonetic: 'Nérs' },
+                { en: 'Lawyer', es: 'Abogado(a)', phonetic: 'Lóyer' },
+                { en: 'Chef', es: 'Cocinero(a) / Chef', phonetic: 'Shef' },
+                { en: 'Student', es: 'Estudiante', phonetic: 'Stiúdent' },
+                { en: 'Police officer', es: 'Policial', phonetic: 'Polís ófiser' }
+            ],
+            food: [
+                { en: 'Apple', es: 'Manzana', phonetic: 'Á-pl' },
+                { en: 'Banana', es: 'Plátano / Banano', phonetic: 'Banána' },
+                { en: 'Orange', es: 'Naranja', phonetic: 'Órenj' },
+                { en: 'Carrot', es: 'Zanahoria', phonetic: 'Károt' },
+                { en: 'Tomato', es: 'Tomate', phonetic: 'Toméitou' },
+                { en: 'Potato', es: 'Papa / Patata', phonetic: 'Potéitou' },
+                { en: 'Watermelon', es: 'Sandía', phonetic: 'Uátermelon' },
+                { en: 'Onion', es: 'Cebolla', phonetic: 'Ónion' }
+            ]
+        };
+
+        const VERBS_DATA = [
+            {
+                infinitive: 'To Be',
+                spanish: 'Ser / Estar',
+                phonetic: 'Tu Bí',
+                present: { I: 'am', 'You/We/They': 'are', 'He/She/It': 'is' },
+                past: { I: 'was', 'You/We/They': 'were', 'He/She/It': 'was' },
+                future: { All: 'will be' },
+                examples: {
+                    present: 'I am a student (Yo soy un estudiante)',
+                    past: 'She was happy (Ella estaba feliz)',
+                    future: 'We will be ready (Estaremos listos)'
+                }
+            },
+            {
+                infinitive: 'To Seem',
+                spanish: 'Parecer',
+                phonetic: 'Tu Sím',
+                present: { 'I/You/We/They': 'seem', 'He/She/It': 'seems' },
+                past: { All: 'seemed' },
+                future: { All: 'will seem' },
+                examples: {
+                    present: 'It seems easy (Parece fácil)',
+                    past: 'You seemed tired (Parecías cansado)',
+                    future: 'It will seem simple (Parecerá simple)'
+                }
+            },
+            {
+                infinitive: 'To Want',
+                spanish: 'Querer',
+                phonetic: 'Tu Uánt',
+                present: { 'I/You/We/They': 'want', 'He/She/It': 'wants' },
+                past: { All: 'wanted' },
+                future: { All: 'will want' },
+                examples: {
+                    present: 'I want water (Quiero agua)',
+                    past: 'He wanted coffee (Él quería café)',
+                    future: 'They will want to come (Ellos querrán venir)'
+                }
+            },
+            {
+                infinitive: 'To Live',
+                spanish: 'Vivir',
+                phonetic: 'Tu Lív',
+                present: { 'I/You/We/They': 'live', 'He/She/It': 'lives' },
+                past: { All: 'lived' },
+                future: { All: 'will live' },
+                examples: {
+                    present: 'We live here (Vivimos aquí)',
+                    past: 'I lived in Spain (Viví en España)',
+                    future: 'She will live in London (Ella vivirá en Londres)'
+                }
+            },
+            {
+                infinitive: 'To Do / Make',
+                spanish: 'Hacer',
+                phonetic: 'Tu Dú / Méik',
+                present: { 'I/You/We/They': 'do', 'He/She/It': 'does' },
+                past: { All: 'did' },
+                future: { All: 'will do' },
+                examples: {
+                    present: 'I do my homework (Hago mi tarea)',
+                    past: 'We did it (Lo hicimos)',
+                    future: 'You will do great (Lo harás genial)'
+                }
+            },
+            {
+                infinitive: 'To Listen',
+                spanish: 'Escuchar',
+                phonetic: 'Tu Lísen',
+                present: { 'I/You/We/They': 'listen', 'He/She/It': 'listens' },
+                past: { All: 'listened' },
+                future: { All: 'will listen' },
+                examples: {
+                    present: 'She listens to music (Ella escucha música)',
+                    past: 'I listened carefully (Escuché atentamente)',
+                    future: 'They will listen to you (Ellos te escucharán)'
+                }
+            },
+            {
+                infinitive: 'To Speak',
+                spanish: 'Hablar',
+                phonetic: 'Tu Spík',
+                present: { 'I/You/We/They': 'speak', 'He/She/It': 'speaks' },
+                past: { All: 'spoke' },
+                future: { All: 'will speak' },
+                examples: {
+                    present: 'I speak English (Hablo inglés)',
+                    past: 'He spoke yesterday (Él habló ayer)',
+                    future: 'We will speak tomorrow (Hablaremos mañana)'
+                }
+            },
+            {
+                infinitive: 'To Have',
+                spanish: 'Tener / Haber',
+                phonetic: 'Tu Jáv',
+                present: { 'I/You/We/They': 'have', 'He/She/It': 'has' },
+                past: { All: 'had' },
+                future: { All: 'will have' },
+                examples: {
+                    present: 'They have a car (Tienen un auto)',
+                    past: 'I had a dream (Tuve un sueño)',
+                    future: 'She will have time (Ella tendrá tiempo)'
+                }
+            },
+            {
+                infinitive: 'To Go',
+                spanish: 'Ir',
+                phonetic: 'Tu Góu',
+                present: { 'I/You/We/They': 'go', 'He/She/It': 'goes' },
+                past: { All: 'went' },
+                future: { All: 'will go' },
+                examples: {
+                    present: 'I go to school (Voy a la escuela)',
+                    past: 'We went home (Fuimos a casa)',
+                    future: 'He will go next week (Él irá la próxima semana)'
+                }
+            }
+        ];
+
+        const GRAMMAR_DATA = {
+            connectors: [
+                { en: 'with', es: 'con', phonetic: 'wid', example: 'Coffee with milk (Café con leche)' },
+                { en: 'and', es: 'y', phonetic: 'ánd', example: 'Cats and dogs (Gatos y perros)' },
+                { en: 'or', es: 'o', phonetic: 'ór', example: 'Tea or coffee? (¿Té o café?)' },
+                { en: 'after', es: 'después', phonetic: 'áf-ter', example: 'After class (Después de clase)' },
+                { en: 'before', es: 'antes', phonetic: 'bi-fór', example: 'Before 5 PM (Antes de las 5 PM)' },
+                { en: 'because', es: 'porque / ya que', phonetic: 'bi-kós', example: 'Because it is good (Porque es bueno)' },
+                { en: 'but', es: 'pero', phonetic: 'bát', example: 'Small but strong (Pequeño pero fuerte)' }
+            ],
+            articles: [
+                { en: 'the', es: 'el / la / los / las', phonetic: 'da', example: 'The book (El libro)' },
+                { en: 'a', es: 'un / una (con consonante)', phonetic: 'ei', example: 'A car (Un carro)' },
+                { en: 'an', es: 'un / una (con vocal)', phonetic: 'án', example: 'An apple (Una manzana)' },
+                { en: 'my', es: 'mi / mis', phonetic: 'mái', example: 'My house (Mi casa)' },
+                { en: 'your', es: 'tu / tus / su', phonetic: 'yúr', example: 'Your friend (Tu amigo)' },
+                { en: 'his', es: 'su (de él)', phonetic: 'jis', example: 'His car (El auto de él)' },
+                { en: 'her', es: 'su (de ella)', phonetic: 'jer', example: 'Her name (El nombre de ella)' },
+                { en: 'their', es: 'su / sus (de ellos)', phonetic: 'dér', example: 'Their project (Su proyecto)' }
+            ]
+        };
+
+        const GRAMMAR_QUIZ_QUESTIONS = [
+            { sentence: 'I want coffee <span class="text-rose-400 font-bold border-b-2 border-rose-500 px-3 py-0.5 bg-rose-500/10 rounded">_____</span> milk.', target: 'with', spanish: 'Quiero café (con) leche.', phonetic: '[wid]' },
+            { sentence: 'Do you prefer tea <span class="text-rose-400 font-bold border-b-2 border-rose-500 px-3 py-0.5 bg-rose-500/10 rounded">_____</span> coffee?', target: 'or', spanish: '¿Prefieres té (o) café?', phonetic: '[ór]' },
+            { sentence: 'This is <span class="text-rose-400 font-bold border-b-2 border-rose-500 px-3 py-0.5 bg-rose-500/10 rounded">_____</span> apple.', target: 'an', spanish: 'Esta es (una) manzana.', phonetic: '[án]' },
+            { sentence: 'We eat <span class="text-rose-400 font-bold border-b-2 border-rose-500 px-3 py-0.5 bg-rose-500/10 rounded">_____</span> the movie ends.', target: 'after', spanish: 'Comemos (después) de que la película termina.', phonetic: '[áf-ter]' },
+            { sentence: 'That is <span class="text-rose-400 font-bold border-b-2 border-rose-500 px-3 py-0.5 bg-rose-500/10 rounded">_____</span> house.', target: 'my', spanish: 'Esa es (mi) casa.', phonetic: '[mái]' },
+            { sentence: 'She likes cats <span class="text-rose-400 font-bold border-b-2 border-rose-500 px-3 py-0.5 bg-rose-500/10 rounded">_____</span> dogs.', target: 'and', spanish: 'A ella le gustan los gatos (y) los perros.', phonetic: '[ánd]' }
+        ];
+
+        /* ==========================================================================
+           2. APP STATE MANAGEMENT & WEB AUDIO / SYNTHESIS
+           ========================================================================== */
+        const state = {
+            score: 0,
+            streak: 1,
+            audioEnabled: true,
+            activeSection: 'alphabet',
+            basicsCategory: 'numbers',
+            activeVerbIndex: 0,
+            
+            // Quizzes internal state
+            alphabetCurrentIndex: 0,
+            basicsCurrentIndex: 0,
+            verbQuizTarget: { verb: 'To Speak', subject: 'I', tense: 'past', answer: 'spoke' },
+            grammarQuizIndex: 0,
+            globalPracticeCount: 1,
+            globalCurrentItem: null
+        };
+
+        // Web Audio API Sound Synthesizer (Chimes for correct/incorrect)
+        const AudioFX = {
+            ctx: null,
+            init() {
+                if (!this.ctx) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    if (AudioCtx) this.ctx = new AudioCtx();
+                }
+            },
+            playCorrect() {
+                if (!state.audioEnabled) return;
+                this.init();
+                if (!this.ctx) return;
+
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+                osc.frequency.exponentialRampToValueAtTime(659.25, this.ctx.currentTime + 0.15); // E5
+                osc.frequency.exponentialRampToValueAtTime(783.99, this.ctx.currentTime + 0.3); // G5
+
+                gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.4);
+
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.4);
+            },
+            playError() {
+                if (!state.audioEnabled) return;
+                this.init();
+                if (!this.ctx) return;
+
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, this.ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(110, this.ctx.currentTime + 0.25);
+
+                gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.3);
+            }
+        };
+
+        // Text To Speech Utility (Web Speech API)
+        function speakEnglish(text) {
+            if (!state.audioEnabled || !('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel(); // Stop ongoing speech
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.9; // Slightly slower for clear learning
+            window.speechSynthesis.speak(utterance);
+        }
+
+        /* ==========================================================================
+           3. UI RENDERERS & INITIALIZERS
+           ========================================================================== */
+
+        // Render Alphabet Section Cards
+        function renderAlphabetGrid() {
+            const container = document.getElementById('alphabetGrid');
+            container.innerHTML = ALPHABET_DATA.map((item, idx) => `
+                <div onclick="playAlphabetItem(${idx})" class="glass-card-interactive rounded-2xl p-4 flex flex-col items-center text-center cursor-pointer group relative overflow-hidden">
+                    <button class="absolute top-2 right-2 text-gray-500 group-hover:text-brand-400 transition-colors">
+                        <i class="fa-solid fa-volume-high text-xs"></i>
+                    </button>
+                    <div class="text-3xl font-display font-extrabold text-white group-hover:scale-110 transition-transform mb-1">
+                        ${item.letter}
+                    </div>
+                    <div class="text-xs font-bold text-brand-400 font-mono mb-1">
+                        [${item.phonetic}]
+                    </div>
+                    <div class="text-[11px] text-gray-400 font-medium truncate w-full">
+                        ${item.example}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function playAlphabetItem(index) {
+            const item = ALPHABET_DATA[index];
+            speakEnglish(item.letter);
+        }
+
+        // Render Basics Section Cards
+        function renderBasicsGrid(categoryKey) {
+            const container = document.getElementById('basicsGrid');
+            const data = BASICS_DATA[categoryKey] || BASICS_DATA.numbers;
+            
+            container.innerHTML = data.map(item => `
+                <div onclick="speakEnglish('${item.en.replace(/'/g, "\\'")}')" class="glass-card-interactive rounded-2xl p-4 flex flex-col justify-between cursor-pointer group">
+                    <div class="flex items-start justify-between">
+                        <div class="text-lg font-bold text-white group-hover:text-brand-300 transition-colors">
+                            ${item.en}
+                        </div>
+                        <span class="text-xs text-gray-500 group-hover:text-brand-400 transition-colors">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </span>
+                    </div>
+                    <div class="mt-3 space-y-1">
+                        <div class="text-xs text-gray-300 font-medium">${item.es}</div>
+                        <div class="text-xs text-brand-400 font-mono">[${item.phonetic}]</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Verb Section Tabs and Active Verb Card
+        function renderVerbsSection() {
+            const tabsContainer = document.getElementById('verbTabs');
+            tabsContainer.innerHTML = VERBS_DATA.map((verb, idx) => `
+                <button onclick="selectVerb(${idx})" class="verb-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition-all ${idx === state.activeVerbIndex ? 'bg-amber-600 text-white shadow-md' : 'bg-darkbg-800 text-gray-400 hover:text-white hover:bg-gray-700'}">
+                    ${verb.infinitive} <span class="text-xs opacity-80">(${verb.spanish})</span>
+                </button>
+            `).join('');
+
+            const verb = VERBS_DATA[state.activeVerbIndex];
+            const container = document.getElementById('verbDetailContainer');
+
+            container.innerHTML = `
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-gray-800 pb-4">
+                    <div>
+                        <span class="text-xs text-amber-400 font-mono">[${verb.phonetic}]</span>
+                        <h3 class="text-2xl font-display font-bold text-white flex items-center gap-3">
+                            ${verb.infinitive}
+                            <span class="text-base text-gray-400 font-normal">(${verb.spanish})</span>
+                        </h3>
+                    </div>
+                    <button onclick="speakEnglish('${verb.infinitive}')" class="bg-gray-800 hover:bg-gray-700 text-amber-300 border border-amber-500/30 px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-volume-high"></i> Escuchar Verbo
+                    </button>
+                </div>
+
+                <!-- Tenses Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Present -->
+                    <div class="bg-darkbg-900/80 rounded-2xl p-4 border border-gray-800">
+                        <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-clock"></i> Present (Presente)
+                        </div>
+                        <ul class="space-y-2 text-sm">
+                            ${Object.entries(verb.present).map(([sub, form]) => `
+                                <li class="flex justify-between items-center py-1 border-b border-gray-800/50">
+                                    <span class="text-gray-400 text-xs">${sub}</span>
+                                    <span class="font-bold text-white font-mono">${form}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- Past -->
+                    <div class="bg-darkbg-900/80 rounded-2xl p-4 border border-gray-800">
+                        <div class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-history"></i> Past (Pasado)
+                        </div>
+                        <ul class="space-y-2 text-sm">
+                            ${Object.entries(verb.past).map(([sub, form]) => `
+                                <li class="flex justify-between items-center py-1 border-b border-gray-800/50">
+                                    <span class="text-gray-400 text-xs">${sub}</span>
+                                    <span class="font-bold text-white font-mono">${form}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- Future -->
+                    <div class="bg-darkbg-900/80 rounded-2xl p-4 border border-gray-800">
+                        <div class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-hourglass-half"></i> Future (Futuro)
+                        </div>
+                        <ul class="space-y-2 text-sm">
+                            ${Object.entries(verb.future).map(([sub, form]) => `
+                                <li class="flex justify-between items-center py-1 border-b border-gray-800/50">
+                                    <span class="text-gray-400 text-xs">${sub}</span>
+                                    <span class="font-bold text-white font-mono">${form}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sentence Examples -->
+                <div class="bg-indigo-950/20 rounded-2xl p-4 border border-indigo-500/20 space-y-2">
+                    <span class="text-xs font-semibold text-indigo-300 block">Ejemplos Prácticos en Oraciones:</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                        <div class="bg-darkbg-900/60 p-2.5 rounded-xl border border-gray-800/80">
+                            <span class="text-emerald-400 font-semibold block mb-0.5">Presente:</span>
+                            <span class="text-gray-200">${verb.examples.present}</span>
+                        </div>
+                        <div class="bg-darkbg-900/60 p-2.5 rounded-xl border border-gray-800/80">
+                            <span class="text-amber-400 font-semibold block mb-0.5">Pasado:</span>
+                            <span class="text-gray-200">${verb.examples.past}</span>
+                        </div>
+                        <div class="bg-darkbg-900/60 p-2.5 rounded-xl border border-gray-800/80">
+                            <span class="text-indigo-400 font-semibold block mb-0.5">Futuro:</span>
+                            <span class="text-gray-200">${verb.examples.future}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectVerb(index) {
+            state.activeVerbIndex = index;
+            renderVerbsSection();
+        }
+
+        // Render Grammar Lists
+        function renderGrammarSection() {
+            const connectorsList = document.getElementById('connectorsList');
+            connectorsList.innerHTML = GRAMMAR_DATA.connectors.map(item => `
+                <div class="py-3 flex items-center justify-between group cursor-pointer" onclick="speakEnglish('${item.en.replace(/'/g, "\\'")}')">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="font-bold text-white group-hover:text-indigo-300 transition-colors">${item.en}</span>
+                            <span class="text-xs text-gray-400">(${item.es})</span>
+                        </div>
+                        <div class="text-[11px] text-gray-500 mt-0.5">${item.example}</div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs text-indigo-400 font-mono">[${item.phonetic}]</span>
+                        <i class="fa-solid fa-volume-high text-xs text-gray-500 group-hover:text-indigo-400"></i>
+                    </div>
+                </div>
+            `).join('');
+
+            const articlesList = document.getElementById('articlesList');
+            articlesList.innerHTML = GRAMMAR_DATA.articles.map(item => `
+                <div class="py-3 flex items-center justify-between group cursor-pointer" onclick="speakEnglish('${item.en.replace(/'/g, "\\'")}')">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="font-bold text-white group-hover:text-rose-300 transition-colors">${item.en}</span>
+                            <span class="text-xs text-gray-400">(${item.es})</span>
+                        </div>
+                        <div class="text-[11px] text-gray-500 mt-0.5">${item.example}</div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs text-rose-400 font-mono">[${item.phonetic}]</span>
+                        <i class="fa-solid fa-volume-high text-xs text-gray-500 group-hover:text-rose-400"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /* ==========================================================================
+           4. QUIZZES & INTERACTIVE PRACTICE LOGIC
+           ========================================================================== */
+
+        function updateScore(points) {
+            state.score += points;
+            document.getElementById('scoreCounter').innerText = state.score;
+        }
+
+        function incrementStreak() {
+            state.streak += 1;
+            document.getElementById('streakCounter').innerText = state.streak;
+        }
+
+        // Section 1: Alphabet Quiz Generator
+        function setupAlphabetQuiz() {
+            state.alphabetCurrentIndex = Math.floor(Math.random() * ALPHABET_DATA.length);
+            const feedback = document.getElementById('alphabetFeedback');
+            feedback.classList.add('hidden');
+            document.getElementById('alphabetInput').value = '';
+        }
+
+        function checkAlphabetQuiz() {
+            const input = document.getElementById('alphabetInput').value.trim().toUpperCase();
+            const targetItem = ALPHABET_DATA[state.alphabetCurrentIndex];
+            const feedback = document.getElementById('alphabetFeedback');
+
+            if (!input) return;
+
+            if (input === targetItem.letter) {
+                AudioFX.playCorrect();
+                updateScore(10);
+                feedback.className = "p-4 rounded-xl text-sm font-medium transition-all bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> ¡Correcto! La letra es <strong>${targetItem.letter}</strong> (${targetItem.spanish}) [${targetItem.phonetic}].`;
+                feedback.classList.remove('hidden');
+                speakEnglish(targetItem.letter);
+                setTimeout(setupAlphabetQuiz, 2200);
+            } else {
+                AudioFX.playError();
+                feedback.className = "p-4 rounded-xl text-sm font-medium transition-all bg-rose-500/20 text-rose-300 border border-rose-500/30";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Incorrecto. Escribiste "${input}". La respuesta correcta es <strong>${targetItem.letter}</strong>.`;
+                feedback.classList.remove('hidden');
+            }
+        }
+
+        // Section 2: Basics Quiz Generator
+        function setupBasicsQuiz() {
+            const categoryItems = BASICS_DATA[state.basicsCategory] || BASICS_DATA.numbers;
+            state.basicsCurrentIndex = Math.floor(Math.random() * categoryItems.length);
+            const currentItem = categoryItems[state.basicsCurrentIndex];
+
+            document.getElementById('basicsPrompt').innerText = currentItem.es;
+            document.getElementById('basicsPhoneticHint').innerText = `[${currentItem.phonetic}]`;
+            document.getElementById('basicsInput').value = '';
+            document.getElementById('basicsFeedback').classList.add('hidden');
+        }
+
+        function checkBasicsQuiz() {
+            const input = document.getElementById('basicsInput').value.trim().toLowerCase();
+            const categoryItems = BASICS_DATA[state.basicsCategory];
+            const targetItem = categoryItems[state.basicsCurrentIndex];
+            const feedback = document.getElementById('basicsFeedback');
+
+            if (!input) return;
+
+            const cleanTarget = targetItem.en.toLowerCase();
+
+            if (input === cleanTarget) {
+                AudioFX.playCorrect();
+                updateScore(15);
+                feedback.className = "p-4 rounded-xl text-sm font-medium transition-all bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> ¡Excelente! "${targetItem.es}" se escribe <strong>${targetItem.en}</strong>.`;
+                feedback.classList.remove('hidden');
+                speakEnglish(targetItem.en);
+                setTimeout(setupBasicsQuiz, 2000);
+            } else {
+                AudioFX.playError();
+                feedback.className = "p-4 rounded-xl text-sm font-medium transition-all bg-rose-500/20 text-rose-300 border border-rose-500/30";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Respuesta errónea. La forma correcta en inglés es <strong>${targetItem.en}</strong>.`;
+                feedback.classList.remove('hidden');
+            }
+        }
+
+        // Section 3: Verb Challenge Generator
+        function setupVerbQuiz() {
+            const randomVerb = VERBS_DATA[Math.floor(Math.random() * VERBS_DATA.length)];
+            const tenses = ['present', 'past', 'future'];
+            const randomTense = tenses[Math.floor(Math.random() * tenses.length)];
+            
+            let subjectKeys = Object.keys(randomVerb[randomTense]);
+            let randomSub = subjectKeys[Math.floor(Math.random() * subjectKeys.length)];
+            let answer = randomVerb[randomTense][randomSub];
+
+            state.verbQuizTarget = {
+                verb: randomVerb.infinitive,
+                spanishVerb: randomVerb.spanish,
+                subject: randomSub,
+                tense: randomTense,
+                answer: answer
+            };
+
+            document.getElementById('verbChallengeTense').innerText = `${randomTense.toUpperCase()} TENSE`;
+            document.getElementById('verbChallengeSubject').innerText = `Sujeto: ${randomSub}`;
+            document.getElementById('verbChallengePrompt').innerHTML = `
+                Conjuga el verbo <span class="text-brand-400">${randomVerb.infinitive} (${randomVerb.spanish})</span> para <span class="text-accent-teal">"${randomSub}"</span> en <span class="text-amber-400">${randomTense}</span>:
+            `;
+            document.getElementById('verbChallengeHint').innerText = `Ejemplo del verbo: ${randomVerb.examples[randomTense]}`;
+            document.getElementById('verbQuizInput').value = '';
+            document.getElementById('verbFeedback').classList.add('hidden');
+        }
+
+        function checkVerbQuiz() {
+            const input = document.getElementById('verbQuizInput').value.trim().toLowerCase();
+            const targetAnswer = state.verbQuizTarget.answer.toLowerCase();
+            const feedback = document.getElementById('verbFeedback');
+
+            if (!input) return;
+
+            if (input === targetAnswer) {
+                AudioFX.playCorrect();
+                updateScore(20);
+                feedback.className = "p-4 rounded-xl text-sm font-medium transition-all bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> ¡Correcto! La conjugación es <strong>"${state.verbQuizTarget.answer}"</strong>.`;
+                feedback.classList.remove('hidden');
+                speakEnglish(`${state.verbQuizTarget.subject} ${state.verbQuizTarget.answer}`);
+                setTimeout(setupVerbQuiz, 2200);
+            } else {
+                AudioFX.playError();
+                feedback.className = "p-4 rounded-xl text-sm font-medium transition-all bg-rose-500/20 text-rose-300 border border-rose-500/30";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Incorrecto. Escribiste "${input}". La conjugación correcta es <strong>"${state.verbQuizTarget.answer}"</strong>.`;
+                feedback.classList.remove('hidden');
+            }
+        }
+
+        // Section 4: Grammar Quiz Generator
+        function setupGrammarQuiz() {
+            state.grammarQuizIndex = Math.floor(Math.random() * GRAMMAR_QUIZ_QUESTIONS.length);
+            const q = GRAMMAR_QUIZ_QUESTIONS[state.grammarQuizIndex];
+
+            document.getElementById('grammarSentencePrompt').innerHTML = q.sentence;
+            document.getElementById('grammarSentenceSpanish').innerHTML = `Traducción: ${q.spanish} <span class="text-indigo-400 font-mono ml-2">${q.phonetic}</span>`;
+            document.getElementById('grammarQuizInput').value = '';
+            document.getElementById('grammarFeedback').classList.add('hidden');
+        }
+
+        function checkGrammarQuiz() {
+            const input = document.getElementById('grammarQuizInput').value.trim().toLowerCase();
+            const q = GRAMMAR_QUIZ_QUESTIONS[state.grammarQuizIndex];
+            const feedback = document.getElementById('grammarFeedback');
+
+            if (!input) return;
+
+            if (input === q.target.toLowerCase()) {
+                AudioFX.playCorrect();
+                updateScore(15);
+                feedback.className = "p-4 rounded-xl text-sm font-medium transition-all bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> ¡Perfecto! La palabra que completa la oración es <strong>"${q.target}"</strong>.`;
+                feedback.classList.remove('hidden');
+                speakEnglish(q.sentence.replace(/<[^>]*>?/gm, q.target));
+                setTimeout(setupGrammarQuiz, 2200);
+            } else {
+                AudioFX.playError();
+                feedback.className = "p-4 rounded-xl text-sm font-medium transition-all bg-rose-500/20 text-rose-300 border border-rose-500/30";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Respuesta incorrecta. La opción correcta es <strong>"${q.target}"</strong>.`;
+                feedback.classList.remove('hidden');
+            }
+        }
+
+        // Section 5: Global Full Mastery Practice Engine
+        function setupGlobalPracticeQuestion() {
+            // Generate pool from all categories
+            const pools = [
+                { type: 'alphabet', data: ALPHABET_DATA },
+                { type: 'basics', data: BASICS_DATA.numbers },
+                { type: 'basics', data: BASICS_DATA.months },
+                { type: 'basics', data: BASICS_DATA.colors },
+                { type: 'basics', data: BASICS_DATA.professions },
+                { type: 'basics', data: BASICS_DATA.food },
+                { type: 'connectors', data: GRAMMAR_DATA.connectors },
+                { type: 'articles', data: GRAMMAR_DATA.articles }
+            ];
+
+            const selectedPool = pools[Math.floor(Math.random() * pools.length)];
+
+            if (selectedPool.type === 'alphabet') {
+                const item = selectedPool.data[Math.floor(Math.random() * selectedPool.data.length)];
+                state.globalCurrentItem = { answer: item.letter, prompt: `¿Cuál es esta letra del abecedario en inglés?`, hint: `Pronunciación: [${item.phonetic}]`, audio: item.letter, category: 'Alphabet (Abecedario)' };
+            } else if (selectedPool.type === 'basics') {
+                const item = selectedPool.data[Math.floor(Math.random() * selectedPool.data.length)];
+                state.globalCurrentItem = { answer: item.en, prompt: `¿Cómo se traduce <span class="text-brand-400">"${item.es}"</span> al inglés?`, hint: `Pronunciación fonética: [${item.phonetic}]`, audio: item.en, category: 'Vocabulario Básico' };
+            } else {
+                const item = selectedPool.data[Math.floor(Math.random() * selectedPool.data.length)];
+                state.globalCurrentItem = { answer: item.en, prompt: `Escribe en inglés la palabra para: <span class="text-rose-400">"${item.es}"</span>`, hint: `Ejemplo: ${item.example}`, audio: item.en, category: 'Artículos / Conectores' };
+            }
+
+            document.getElementById('practiceQuestionNum').innerText = `#${state.globalPracticeCount}`;
+            document.getElementById('practiceCategoryBadge').innerText = `Categoría: ${state.globalCurrentItem.category}`;
+            document.getElementById('practicePromptText').innerHTML = state.globalCurrentItem.prompt;
+            document.getElementById('practiceSubHint').innerText = state.globalCurrentItem.hint;
+            document.getElementById('globalPracticeInput').value = '';
+            document.getElementById('globalPracticeFeedback').classList.add('hidden');
+        }
+
+        function checkGlobalPractice() {
+            const input = document.getElementById('globalPracticeInput').value.trim().toLowerCase();
+            const targetAnswer = state.globalCurrentItem.answer.toLowerCase();
+            const feedback = document.getElementById('globalPracticeFeedback');
+
+            if (!input) return;
+
+            if (input === targetAnswer) {
+                AudioFX.playCorrect();
+                updateScore(25);
+                incrementStreak();
+                feedback.className = "rounded-2xl p-4 text-sm font-medium transition-all bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> ¡Respuesta Correcta! <strong>"${state.globalCurrentItem.answer}"</strong>`;
+                feedback.classList.remove('hidden');
+                speakEnglish(state.globalCurrentItem.audio);
+
+                state.globalPracticeCount++;
+                setTimeout(setupGlobalPracticeQuestion, 2200);
+            } else {
+                AudioFX.playError();
+                feedback.className = "rounded-2xl p-4 text-sm font-medium transition-all bg-rose-500/20 text-rose-300 border border-rose-500/30";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Incorrecto. Escribiste "${input}". La respuesta correcta es <strong>"${state.globalCurrentItem.answer}"</strong>.`;
+                feedback.classList.remove('hidden');
+            }
+        }
+
+
+        /* ==========================================================================
+           5. EVENT LISTENERS & INITIALIZATION
+           ========================================================================== */
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render Initial Data
+            renderAlphabetGrid();
+            renderBasicsGrid('numbers');
+            renderVerbsSection();
+            renderGrammarSection();
+
+            // Set Initial Quizzes
+            setupAlphabetQuiz();
+            setupBasicsQuiz();
+            setupVerbQuiz();
+            setupGrammarQuiz();
+            setupGlobalPracticeQuestion();
+
+            // Sidebar Navigation Switching
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const sections = document.querySelectorAll('.content-section');
+
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetSec = btn.getAttribute('data-section');
+
+                    navButtons.forEach(b => {
+                        b.classList.remove('active', 'bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-600/25');
+                        b.classList.add('text-gray-400', 'hover:text-white', 'hover:bg-gray-800/60');
+                    });
+
+                    btn.classList.add('active', 'bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-600/25');
+                    btn.classList.remove('text-gray-400', 'hover:text-white', 'hover:bg-gray-800/60');
+
+                    sections.forEach(sec => sec.classList.add('hidden'));
+                    document.getElementById(`section-${targetSec}`).classList.remove('hidden');
+
+                    // On mobile, auto close sidebar after selection
+                    const sidebar = document.getElementById('sidebar');
+                    if (!sidebar.classList.contains('-translate-x-full')) {
+                        sidebar.classList.add('-translate-x-full');
+                    }
+                });
+            });
+
+            // Mobile Menu Toggle
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('-translate-x-full');
+            });
+
+            // Category Tab Switcher for Basics Section
+            const catTabs = document.querySelectorAll('.cat-tab');
+            catTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    catTabs.forEach(t => {
+                        t.classList.remove('bg-brand-600', 'text-white', 'shadow-md');
+                        t.classList.add('bg-darkbg-800', 'text-gray-400');
+                    });
+                    tab.classList.add('bg-brand-600', 'text-white', 'shadow-md');
+                    tab.classList.remove('bg-darkbg-800', 'text-gray-400');
+
+                    const catKey = tab.getAttribute('data-cat');
+                    state.basicsCategory = catKey;
+                    renderBasicsGrid(catKey);
+                    
+                    document.getElementById('basicsQuizCatBadge').innerText = `Categoría: ${tab.innerText.trim()}`;
+                    setupBasicsQuiz();
+                });
+            });
+
+            // Audio Toggle Button
+            document.getElementById('toggleAudioBtn').addEventListener('click', () => {
+                state.audioEnabled = !state.audioEnabled;
+                const btn = document.getElementById('toggleAudioBtn');
+                if (state.audioEnabled) {
+                    btn.className = "text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-full font-medium flex items-center space-x-1 hover:bg-emerald-500/30";
+                    btn.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i> <span>Activo</span>`;
+                } else {
+                    btn.className = "text-xs bg-rose-500/20 text-rose-400 border border-rose-500/30 px-2.5 py-1 rounded-full font-medium flex items-center space-x-1 hover:bg-rose-500/30";
+                    btn.innerHTML = `<i class="fa-solid fa-xmark text-[10px]"></i> <span>Mute</span>`;
+                }
+            });
+
+            // Quiz Form Submissions
+            document.getElementById('alphabetQuizForm').addEventListener('submit', checkAlphabetQuiz);
+            document.getElementById('playAlphabetAudioBtn').addEventListener('click', () => {
+                const target = ALPHABET_DATA[state.alphabetCurrentIndex];
+                speakEnglish(target.letter);
+            });
+
+            document.getElementById('basicsQuizForm').addEventListener('submit', checkBasicsQuiz);
+            document.getElementById('listenBasicsPromptBtn').addEventListener('click', () => {
+                const categoryItems = BASICS_DATA[state.basicsCategory];
+                const currentItem = categoryItems[state.basicsCurrentIndex];
+                speakEnglish(currentItem.en);
+            });
+
+            document.getElementById('verbQuizForm').addEventListener('submit', checkVerbQuiz);
+            document.getElementById('grammarQuizForm').addEventListener('submit', checkGrammarQuiz);
+
+            // Global Practice Form Events
+            document.getElementById('globalPracticeForm').addEventListener('submit', checkGlobalPractice);
+            document.getElementById('listenPracticeAudioBtn').addEventListener('click', () => {
+                if (state.globalCurrentItem) {
+                    speakEnglish(state.globalCurrentItem.audio);
+                }
+            });
+            document.getElementById('skipPracticeBtn').addEventListener('click', () => {
+                setupGlobalPracticeQuestion();
+            });
+            document.getElementById('clearPracticeInputBtn').addEventListener('click', () => {
+                document.getElementById('globalPracticeInput').value = '';
+            });
+        });
+    </script>
+</body>
+</html>
+```
